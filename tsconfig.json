@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "types": ["vite/client"],
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "paths": {
+      "@ruget/analysis": ["./crates/analysis/pkg/analysis"],
+    }
+  },
+}
