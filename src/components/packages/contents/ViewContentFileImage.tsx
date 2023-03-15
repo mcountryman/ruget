@@ -10,7 +10,10 @@ interface Props {
 export function ViewContentImage({ entry }: Props) {
   // todo: pass this in via props
   const { name, version } = useParams();
-  const bytes = usePackageEntryBytes(name, version, entry.path);
+  const { data: bytes } = usePackageEntryBytes(name, version, entry.path);
+  if (!bytes) {
+    return null;
+  }
   const blob = new Blob([bytes.buffer], { type: entry.mimeType });
   const src = URL.createObjectURL(blob);
 

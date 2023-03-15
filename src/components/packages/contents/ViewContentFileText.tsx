@@ -14,8 +14,8 @@ export function ViewContentText({ entry }: Props) {
   // todo: pass this in via props
   const { name, version } = useParams();
   const { ref, height } = useResizeDetector();
-  const bytes = usePackageEntryBytes(name, version, entry.path);
-  const value = new TextDecoder().decode(bytes);
+  const { data: bytes } = usePackageEntryBytes(name, version, entry.path);
+  const value = bytes ? new TextDecoder().decode(bytes) : "";
 
   return (
     <Box ref={ref} sx={{ flexGrow: 1 }}>

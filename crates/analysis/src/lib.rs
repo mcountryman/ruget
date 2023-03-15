@@ -13,7 +13,6 @@ pub fn set_hook() {
 #[derive(Serialize)]
 struct Metadata {
   nuspec: Nuspec,
-  icon: Option<Vec<u8>>,
   entries: Vec<NupkgEntry>,
 }
 
@@ -23,19 +22,7 @@ pub fn get_metadata(bytes: &[u8]) -> Result<JsValue, JsValue> {
   let nuspec = nupkg.nuspec().unwrap();
   let entries = nupkg.entries();
 
-  let icon = nuspec
-    .icon
-    .as_ref()
-    .map(|icon| nupkg.get_entry_bytes(icon).unwrap());
-
-  Ok(
-    serde_wasm_bindgen::to_value(&Metadata {
-      icon,
-      nuspec,
-      entries,
-    })
-    .unwrap(),
-  )
+  Ok(serde_wasm_bindgen::to_value(&Metadata { nuspec, entries }).unwrap())
 }
 
 #[wasm_bindgen]
