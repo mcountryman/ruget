@@ -17,7 +17,7 @@ const Container = styled(Box)(({ theme }) => ({
 }));
 
 export function PkgIcon({ name, version }: Props) {
-  const { data: src } = usePackageIcon(name, version);
+  const src = usePackageIcon(name, version);
   if (!src) {
     return null;
   }

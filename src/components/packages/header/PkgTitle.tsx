@@ -16,7 +16,7 @@ export function PkgTitle({ name, version }: Props) {
   }
 
   return (
-    <Stack sx={{ py: 2, alignItems: "center" }} direction="row">
+    <Stack sx={{ ml: 0.5, py: 2, alignItems: "center" }} direction="row">
       <PkgIcon name={name} version={version} />
 
       <Typography variant="h6">{meta.nuspec.id}</Typography>

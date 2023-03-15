@@ -9,7 +9,7 @@ export function getNugetNupkg(index: NugetApiIndex, packageName: string, version
   packageName = packageName.toLowerCase();
   version = version.toLowerCase();
 
-  return fetch(`${resource["@id"]}/${packageName}/${version}/${packageName}.${version}.nupkg`).then(
+  return fetch(`${resource["@id"]}${packageName}/${version}/${packageName}.${version}.nupkg`).then(
     res => {
       if (!res.ok) {
         throw new Error(`Failed to fetch ${packageName}`);

@@ -1,5 +1,3 @@
-import DownloadSharp from "@mui/icons-material/DownloadSharp";
-import FlagSharp from "@mui/icons-material/FlagSharp";
 import Avatar from "@mui/material/Avatar";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -8,21 +6,24 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { SearchResult } from "../../../utils/nuget/findNugetPackages";
+import { ResultItemInfo } from "./ResultItemInfo";
 
 interface Props {
   result: SearchResult;
 }
 
 export function ResultItem({ result }: Props) {
-  const downloadsFmt = Intl.NumberFormat("en", { notation: "compact" });
-
   return (
     <ListItemButton component={Link} to={`packages/${result.id}/${result.version}`}>
       <ResultItemAvatar iconUrl={result.iconUrl} />
       <ListItemText
         primary={
           <Stack spacing={2} direction="row" alignItems="center">
-            <Typography variant="body1" component="span">
+            <Typography
+              sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+              variant="body1"
+              component="span"
+            >
               {result.id}
             </Typography>
           </Stack>
@@ -41,23 +42,7 @@ export function ResultItem({ result }: Props) {
         disableTypography
       />
 
-      <Stack spacing={2} direction="row" alignItems="center">
-        <Stack spacing={0.5} direction="row" alignItems="center">
-          <FlagSharp color="primary" fontSize="small" />
-          <Typography color="primary" variant="body2" component="span">
-            {result.version}
-          </Typography>
-        </Stack>
-
-        {result.totalDownloads !== undefined && (
-          <Stack spacing={0.5} direction="row" alignItems="center">
-            <DownloadSharp color="secondary" fontSize="small" />
-            <Typography color="secondary" variant="body2" component="span">
-              {downloadsFmt.format(result.totalDownloads)}
-            </Typography>
-          </Stack>
-        )}
-      </Stack>
+      <ResultItemInfo result={result} />
     </ListItemButton>
   );
 }
